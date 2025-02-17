@@ -1,4 +1,17 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  before_action :set_tenant
+
+  private
+
+  def set_tenant
+  
+    # Find the school based on the subdomain
+    school = School.find_by(username: request.subdomain)
+    
+    if school
+      Apartment::Tenant.switch!("school_#{school.id}")
+    else
+      render plain: "Tenant not found", status: :not_found
+    end
+  end
 end

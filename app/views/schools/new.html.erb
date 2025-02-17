@@ -1,0 +1,19 @@
+<h1>Create a New School</h1>
+
+<%= form_with model: @school, local: true do |f| %>
+  <p>
+    <%= f.label :username %><br>
+    <%= f.text_field :username, required: true %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, required: true %>
+  </p>
+
+  <p>
+    <%= f.submit "Create School" %>
+  </p>
+<% end %>
+
+<%= link_to "Back to Schools", schools_path %>
