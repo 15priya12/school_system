@@ -16,6 +16,12 @@ class SchoolsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  def destroy
+    @school = School.find(params[:id])
+    @school.destroy
+    redirect_to schools_path, notice: "School deleted successfully."
+  end
+  
 
   private
 

@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     resources :students, only: [:index, :new, :create]
   end
 
-  resources :schools, only: [:index, :new, :create]
+  resources :schools, only: [:index, :new, :create, :destroy]
+  get "/schools/:id/delete", to: "schools#destroy", as: "delete_school"
+
 end

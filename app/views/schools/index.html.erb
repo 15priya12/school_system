@@ -12,8 +12,8 @@
       <tr>
         <td><%= school.username %></td>
         <td>
-          <a href="#">View</a> | 
-          <a href="#">Delete</a>
+        <%= link_to "Delete", delete_school_path(school), data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+
         </td>
       </tr>
     <% end %>
