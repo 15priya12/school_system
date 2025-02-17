@@ -4,11 +4,15 @@ class School < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
     after_create :create_tenant
+    validates :username, presence: true, uniqueness: true
+
   
     private
   
     def create_tenant
-      Apartment::Tenant.create(username) # Create schema with school username
-    end
+        return if username.blank?  # Prevents Apartment from running if username is nil or empty
+        Apartment::Tenant.create(username)
+      end
+      
   end
   
