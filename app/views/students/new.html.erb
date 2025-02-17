@@ -1,0 +1,19 @@
+<h1>Create a New Student</h1>
+
+<%= form_with model: @student, local: true do |f| %>
+  <p>
+    <%= f.label :email %><br>
+    <%= f.email_field :email, required: true %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password, required: true %>
+  </p>
+
+  <p>
+    <%= f.submit "Create Student" %>
+  </p>
+<% end %>
+
+<%= link_to "Back to Students", students_path %>

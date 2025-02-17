@@ -4,14 +4,13 @@ class ApplicationController < ActionController::Base
   private
 
   def set_tenant
-  
-    # Find the school based on the subdomain
-    school = School.find_by(username: request.subdomain)
-    
+    return if request.subdomain.blank? || request.subdomain == "www"
+
+    school = School.find_by(username: request.subdomain) # Find school by subdomain
     if school
-      Apartment::Tenant.switch!("school_#{school.id}")
+      Apartment::Tenant.switch!(school.username) # Now we directly use `username` for schema
     else
-      render plain: "Tenant not found", status: :not_found
+      render plain: "School not found", status: :not_found
     end
   end
 end

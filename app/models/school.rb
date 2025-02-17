@@ -4,7 +4,7 @@ class School < ApplicationRecord
     private
   
     def create_tenant
-      Apartment::Tenant.create("school_#{id}")
+      Apartment::Tenant.create(username) # Create schema with school username
     end
   end
   

@@ -19,9 +19,8 @@ Apartment.configure do |config|
   #
   # config.excluded_models = %w{ Tenant }
   config.excluded_models = %w[School] # Schools exist in the public schema
-  config.tenant_names = -> { School.pluck(:id).map { |id| "school_#{id}" } }
-  config.use_schemas = true # Ensure schema-based isolation
-
+  config.tenant_names = lambda { School.pluck(:username) } # Use `username` as schema name
+  config.use_schemas = true
   # In order to migrate all of your Tenants you need to provide a list of Tenant names to Apartment.
   # You can make this dynamic by providing a Proc object to be called on migrations.
   # This object should yield either:
