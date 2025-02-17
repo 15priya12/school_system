@@ -1,16 +1,14 @@
 class ApplicationController < ActionController::Base
-  before_action :set_tenant
+  protected
 
-  private
-
-  def set_tenant
-    return if request.subdomain.blank? || request.subdomain == "www"
-
-    school = School.find_by(username: request.subdomain) # Find school by subdomain
-    if school
-      Apartment::Tenant.switch!(school.username) # Now we directly use `username` for schema
+  # Redirect users after sign-in
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(Admin)
+      schools_path # Redirect Admins to /schools
+    elsif resource.is_a?(School)
+      "http://#{resource.username}.lvh.me:3000/students" # Redirect Schools to their subdomain
     else
-      render plain: "School not found", status: :not_found
+      root_path
     end
   end
 end

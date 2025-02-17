@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @schools = School.all
   end
