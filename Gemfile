@@ -2,6 +2,8 @@ source "https://rubygems.org"
 gem 'ros-apartment', require: 'apartment'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.1"
+gem 'rack-cors'
+gem "byebug"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 # Use mysql as the database for Active Record
